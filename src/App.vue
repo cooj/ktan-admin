@@ -14,6 +14,9 @@ import { useThemeConfig } from '@/stores/themeConfig'
 import { globalComponentSize } from '@/utils/other'
 import { Local, Session } from '@/utils/storage'
 import LockScreen from '@/layout/lockScreen/index.vue'
+import { useSystemState } from '@/stores/user'
+
+useSystemState().getSystemInfo()
 
 const stores = useTagsViewRoutes()
 const storesThemeConfig = useThemeConfig()

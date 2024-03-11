@@ -29,7 +29,6 @@ import { ElMessage } from 'element-plus'
 import SetBasic from '@/views/base/components/SetBasic.vue'
 import SetAbout from '@/views/base/components/SetAbout.vue'
 import SetContact from '@/views/base/components/SetContact.vue'
-import { getSystemInfo } from '@/api/system'
 
 const activeName = ref('1')
 
@@ -42,10 +41,7 @@ const companyInfo = ref<SystemCompanyApi_GetInfoResponse>()
 
 // 初始化数据
 const initDefaultData = async () => {
-    const res = await getSystemInfo()
-    if (res.code !== 200) return ElMessage.error(res.msg)
-
-    companyInfo.value = res.data
+    companyInfo.value = await useSystemState().getSystemInfo(true)
 
     defData.ready = true
 }

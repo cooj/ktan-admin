@@ -35,7 +35,7 @@
 <script lang="ts" setup>
 import NewsModel from './components/ClassifyModel.vue'
 import { PAGINATION } from '@/config/global'
-import { getGoodsClassifyList, getGoodsList, setGoodsDelete } from '@/api/list'
+import { getGoodsClassifyList, getGoodsList, setGoodsClassifyDelete, setGoodsDelete } from '@/api/list'
 import { MenuApi } from '@/api/system/menu'
 
 const state = reactive<{
@@ -134,7 +134,7 @@ const onRowDel = (row: TableDataItem) => {
         type: 'warning',
         buttonSize: 'default',
     }).then(async () => {
-        const res = await setGoodsDelete({ id: row.id })
+        const res = await setGoodsClassifyDelete({ id: row.id })
         if (res.code !== 200) return ElMessage.error(res.msg)
 
         ElMessage.success('删除成功')

@@ -403,7 +403,7 @@ const onConfirm = useThrottleFn(async () => {
         if (res.code !== 200) return ElMessage.error(res.msg)
         ElMessage.success('添加成功')
     } else {
-        const param: INewsEdit = {
+        const param: IGoodsEdit = {
             ...data,
             id: form.data.id,
         }

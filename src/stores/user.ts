@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { UserApi } from '@/api/system/user'
 import { Session } from '@/utils/storage'
+import { getSystemInfo as ApiSystem } from '@/api/system'
 
 type MenuDataItem = UserApi_GetMenuItem
 
@@ -31,7 +32,7 @@ export const useUserState = defineStore('useUser', {
                 const user = res1.data
                 this.updateUserInfo(user)
             } else {
-                throw ('返回用户信息有误！')
+                throw new Error('返回用户信息有误！')
             }
             // if (res2.code == 200) {
             //     this.menuList = res2.data.menu
@@ -157,4 +158,38 @@ export const useUserState = defineStore('useUser', {
             // Session.set("userData", userInfo)
         },
     },
+})
+
+/**
+ * 系统信息
+ * @methods getSystemInfo 设置系统信息
+ * @methods updateUserInfo 更新系统信息
+ */
+export const useSystemState = defineStore('useSystem', () => {
+    const systemInfo = ref<SystemCompanyApi_GetInfoResponse>()
+
+    async function getSystemInfo(update?: boolean) {
+        if (!update && systemInfo.value !== undefined) return systemInfo.value
+
+        // 获取系统信息、同时获取到对应的菜单（减少首次进入等待时间）
+        const [res1] = await Promise.all([
+            ApiSystem(),
+            // UserApi.getMenu(),
+        ])
+
+        if (res1 && res1.code === 200) {
+            const user = res1.data
+            systemInfo.value = user
+            // this.updateUserInfo(user)
+        } else {
+            systemInfo.value = undefined
+            // throw new Error('返回用户信息有误！')
+        }
+
+        return systemInfo.value
+
+        // this.updateUserInfo(data)
+    }
+
+    return { getSystemInfo, systemInfo }
 })
