@@ -4,7 +4,7 @@
  * 轮播图列表 - 响应数据
  */
 declare interface IBannerGetList extends ListPage {
-    type: 1 | 2 | 5,   // 5:轮播图 2：友情链接
+    type: 1 | 2 | 5 | 6|7,   // 5:轮播图 2：友情链接 6：荣誉资质,7: 关于我们展示图
 }
 
 
@@ -81,8 +81,8 @@ declare interface IOtherInfoUpdate {
     content: string; // 内容
     content_en: string; // 内容
 
-    type: number;    // 类型 1:关于我们，2：联系我们
-
+    type: number | string;    // 类型 1:关于我们，2：联系我们
+    key?: string
 
 }
 
@@ -92,7 +92,7 @@ declare interface IOtherInfoUpdate {
  * 新闻列表 - 请求参数
  */
 declare interface INewsGetList extends ListPage {
-    type: number|string;    // 类型
+    type: number | string;    // 类型
     title?: string;  // 标题
 }
 
@@ -112,7 +112,7 @@ declare interface INewsGetListResponse extends ListTotal {
         "img": "http://localhost:9008/upload/2023/8/31/1693465126951cbycq5.png",
         "sort": 0,
         "isHide": boolean,
-        "type": 1|2,
+        "type": 1 | 2,
         "createdAt": "2023-08-31T06:59:35.000Z",
         "updatedAt": "2023-08-31T06:59:35.000Z"
     }[]

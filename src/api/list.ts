@@ -29,7 +29,7 @@ export const setGoodsClassifyDelete = (data: { id: number }) => post('/api/class
 
 // 、、、   ///
 // 获取关于我们、联系我们信息
-export const getOtherInfo = (data: { type: number }) => post<IOtherInfoResponse | null>('/api/other/info', data)
+export const getOtherInfo = (data: { type: number | string }) => post<IOtherInfoResponse | null>('/api/other/info', data)
 // 更新关于我们、联系我们信息
 export const setOtherInfoUpdate = (data: IOtherInfoUpdate) => post('/api/other/edit', data)
 

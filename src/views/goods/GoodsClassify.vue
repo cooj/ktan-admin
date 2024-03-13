@@ -6,28 +6,31 @@
                 新增{{ state.title }}
             </el-button>
         </my-form-tool>
-        <MyTable v-model:page="tableData.pagination" v-model:table-header="tableData.tableHeader"
-            class="jm-box table-box" :data="tableData.data" row-key="id" @update:page="onHandleCurrentChange">
-            <template #type="{ scopes }">
-                {{ scopes.row.classify.title }}
-            </template>
-            <template #status="{ scopes }">
-                <el-tag v-if="scopes.row.status === 1" type="">
-                    是
-                </el-tag>
-                <el-tag v-else type="info">
-                    否
-                </el-tag>
-            </template>
-            <template #operate="{ scopes }">
-                <el-button size="small" text type="primary" @click.stop="onOpenEdit(scopes.row)">
-                    修改
-                </el-button>
-                <el-button size="small" text type="primary" @click.stop="onRowDel(scopes.row)">
-                    删除
-                </el-button>
-            </template>
-        </MyTable>
+        <div class="min-h-0 flex-1">
+            <CoTable v-model:option="tableData" class="table-box" row-key="id" border
+                @pagination="onHandleCurrentChange">
+                <!-- <template #title="{ row }">
+                    {{ row?.classify?.title }}
+                </template> -->
+                <template #status="{ row }">
+                    <el-tag v-if="row.status === 1" type="">
+                        是
+                    </el-tag>
+                    <el-tag v-else type="info">
+                        否
+                    </el-tag>
+                </template>
+                <template #operate="{ row }">
+                    <el-button size="small" text type="primary" @click.stop="onOpenEdit(row)">
+                        修改
+                    </el-button>
+                    <el-button size="small" text type="primary" @click.stop="onRowDel(row)">
+                        删除
+                    </el-button>
+                </template>
+            </CoTable>
+        </div>
+
         <NewsModel ref="modelRef" v-bind="state" :list="tableData.data" @update="initTableData" />
     </my-box>
 </template>
@@ -71,7 +74,7 @@ const searchData = reactive<SearchDataType<FormSearchData>>({
 })
 
 type TableDataItem = IGoodsClassifyGetListResponse['list'][0]
-const tableData = reactive<TableType<TableDataItem>>({
+const tableData = reactive<CoTableProps<TableDataItem>>({
     data: [],
     tableHeader: [
         { property: 'id', label: 'id', width: 150 },
@@ -80,8 +83,8 @@ const tableData = reactive<TableType<TableDataItem>>({
         { property: 'title', label: '分类名称', minWidth: 150 },
         // { property: 'type', label: '分类名称', width: 180, slot: true },
         { property: 'sort', label: '排序', width: 100, align: 'center' },
-        { property: 'status', label: '是否隐藏', width: 150, align: 'center', slot: true },
-        { property: 'operate', label: '操作', width: 130, fixed: 'right', align: 'center', slot: true },
+        { property: 'status', label: '是否显示', width: 150, align: 'center' },
+        { property: 'operate', label: '操作', width: 130, fixed: 'right', align: 'center' },
     ],
     pagination: {
         ...PAGINATION,
@@ -101,9 +104,9 @@ const initDefaultData = async () => {
 // 初始化菜单数据
 const initTableData = async () => {
     const data: IGoodsGetList = {
-        isPage: 1,
-        page: tableData.pagination.page,
-        pageSize: tableData.pagination.page_size,
+        isPage: 0,
+        // page: tableData.pagination.page,
+        // pageSize: tableData.pagination.page_size,
         title: searchData.data.name?.trim() ?? '',
         // type: Number(searchData.data.type) || '',
     }
@@ -112,7 +115,7 @@ const initTableData = async () => {
     const res = await getGoodsClassifyList(data)
     if (res.code !== 200) return ElMessage.error(res.msg)
 
-    console.log(res)
+    // console.log(res)
 
     tableData.data = res.data.list
     // tableData.pagination.total = res.data.total

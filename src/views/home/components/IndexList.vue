@@ -11,47 +11,48 @@
                 刷新
             </el-button>
         </div>
-        <MyTable v-model:page="tableData.pagination" v-model:table-header="tableData.tableHeader"
-            class="jm-box table-box" :data="tableData.data" @update:page="onHandleCurrentChange">
-            <template #img="{ scopes }">
-                <co-image :src="scopes.row.img" :icon-size="28" :preview-src-list="[scopes.row.img]" preview-teleported
-                    fit="contain" class="ma h50px w100px block!" />
-            </template>
+        <div class="min-h-0 flex-1">
+            <CoTable v-model:option="tableData" class="table-box" border @pagination="onHandleCurrentChange">
+                <template #img="{ row }">
+                    <co-image :src="row.img" :icon-size="28" :preview-src-list="[row.img]" preview-teleported
+                        fit="contain" class="ma h50px w100px block!" />
+                </template>
 
-            <template #isHide="{ scopes }">
-                <el-tag v-if="scopes.row.isHide" type="info">
-                    隐藏
-                </el-tag>
-                <el-tag v-else type="">
-                    显示
-                </el-tag>
-            </template>
+                <template #isHide="{ row }">
+                    <el-tag v-if="row.isHide" type="info">
+                        隐藏
+                    </el-tag>
+                    <el-tag v-else type="">
+                        显示
+                    </el-tag>
+                </template>
 
-            <template #operate="{ scopes }">
-                <el-button size="small" text type="primary" @click.stop="onOpenEdit(scopes.row)">
-                    修改
-                </el-button>
-                <el-button size="small" text type="primary" @click.stop="onRowDel(scopes.row)">
-                    删除
-                </el-button>
-            </template>
-        </MyTable>
-        <MenuModel ref="modelRef" v-bind="props" @update="initTableData" />
+                <template #operate="{ row }">
+                    <el-button size="small" text type="primary" @click.stop="onOpenEdit(row)">
+                        修改
+                    </el-button>
+                    <el-button size="small" text type="primary" @click.stop="onRowDel(row)">
+                        删除
+                    </el-button>
+                </template>
+            </CoTable>
+        </div>
+        <LinkModel ref="modelRef" v-bind="props" @update="initTableData" />
     </my-box>
 </template>
 
 <script lang="ts" setup>
-import MenuModel from '@/views/home/components/BannerModel.vue'
+import LinkModel from '@/views/home/components/BannerModel.vue'
 import { PAGINATION } from '@/config/global'
 
 import { getBannerList, setBannerDelete } from '@/api/list'
 
 const props = defineProps<{
-    type: 1 | 2 | 5
+    type: 1 | 2 | 5 | 6 | 7
     title: string
 }>()
 
-const modelRef = ref<InstanceType<typeof MenuModel>>()
+const modelRef = ref<InstanceType<typeof LinkModel>>()
 
 const defData = reactive({
     loading: false,
@@ -59,17 +60,17 @@ const defData = reactive({
 })
 
 type TableDataItem = IBannerGetListResponse['list'][0]
-const tableData = reactive<TableType<TableDataItem>>({
+const tableData = reactive<CoTableProps<TableDataItem>>({
     data: [],
     tableHeader: [
         { property: 'id', label: 'id', width: 80 },
-        { property: 'img', label: '图片', width: 120, slot: true, align: 'center' },
+        { property: 'img', label: '图片', width: 120, align: 'center' },
         { property: 'title', label: '标题', minWidth: 130 },
-        { property: 'title_en', label: '英文标题', minWidth: 150 },
-        { property: 'href', label: '链接地址', minWidth: 150 },
-        { property: 'isHide', label: '是否隐藏', width: 100, align: 'center', slot: true },
+        { property: 'title_en', label: '英文标题', minWidth: 150, other: { isHide: [6, 7].includes(props.type) } },
+        { property: 'href', label: '链接地址', minWidth: 150, other: { isHide: [6, 7].includes(props.type) } },
+        { property: 'isHide', label: '是否隐藏', width: 100, align: 'center' },
         { property: 'sort', label: '排序', width: 100, align: 'center' },
-        { property: 'operate', label: '操作', width: 110, fixed: 'right', align: 'center', slot: true },
+        { property: 'operate', label: '操作', width: 110, fixed: 'right', align: 'center' },
     ],
     pagination: {
         ...PAGINATION,

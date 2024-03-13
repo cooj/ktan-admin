@@ -14,7 +14,7 @@
                 <UploadFile v-model="form.data.img" />
             </el-form-item>
 
-            <el-form-item label="链接地址" prop="href">
+            <el-form-item v-if="![6, 7].includes(props.type)" label="链接地址" prop="href">
                 <el-input v-model="form.data.href" maxlength="200" placeholder="" clearable />
             </el-form-item>
 
@@ -47,7 +47,7 @@ import { useLoadingSubmit } from '@/hooks/useLoadingSubmit'
 import { setBannerAdd, setBannerUpdate } from '@/api/list'
 
 const props = defineProps<{
-    type: 1 | 2 | 5
+    type: 1 | 2 | 5 | 6 | 7
     title: string
 }>()
 
@@ -81,15 +81,15 @@ const rules = reactive<FormRules>({
     title: [ // 菜单名称
         { required: true, whitespace: true, message: '必填项不能为空', trigger: 'blur' },
     ],
-    title_en: [ // 菜单名称
-        { required: true, whitespace: true, message: '必填项不能为空', trigger: 'blur' },
-    ],
+    // title_en: [ // 菜单名称
+    //     { required: true, whitespace: true, message: '必填项不能为空', trigger: 'blur' },
+    // ],
 
     href: [
         { required: true, whitespace: true, message: '必填项不能为空', trigger: 'blur' },
     ],
     img: [
-        // { required: true, whitespace: true, message: '必填项不能为空', trigger: 'blur' },
+        { required: [6, 7].includes(props.type), message: '必填项不能为空', trigger: 'blur' },
     ],
 })
 
