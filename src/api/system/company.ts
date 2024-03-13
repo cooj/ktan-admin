@@ -20,18 +20,4 @@ export const SystemCompanyApi = {
      * @returns
      */
     editSystem: (data: ISystemEditParams) => post<SystemCompanyApi_GetInfoResponse>('/api/system/edit', data),
-
-    /**
-     *
-     * 获取公司信息
-     * @returns
-     */
-    getInfo: () => post<SystemCompanyApi_GetInfoResponse>('/api/company/info'),
-
-    /**
-     *
-     * 修改公司信息
-     * @returns
-     */
-    edit: (data: ICompanyEditParams) => post<SystemCompanyApi_GetInfoResponse>('/api/company/edit', data),
 }

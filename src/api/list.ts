@@ -42,3 +42,13 @@ export const setNewsAdd = (data: INewsAdd) => post('/api/news/add', data)
 export const setNewsUpdate = (data: INewsEdit) => post('/api/news/edit', data)
 // 删除新闻
 export const setNewsDelete = (data: { id: number }) => post('/api/news/delete', data)
+
+// 、、、   ///
+// 获取人才招聘列表
+export const getRecruitList = (data?: IRecruitGetList) => post<IRecruitGetListResponse>('/api/recruit/get_list', data)
+// 添加人才招聘
+export const setRecruitAdd = (data: IRecruitAdd) => post('/api/recruit/add', data)
+// 修改人才招聘
+export const setRecruitUpdate = (data: IRecruitEdit) => post('/api/recruit/edit', data)
+// 删除人才招聘
+export const setRecruitDelete = (data: { id: number }) => post('/api/recruit/delete', data)

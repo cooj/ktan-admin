@@ -105,9 +105,26 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
                 },
             },
             {
+                path: '/service',
+                name: 'service',
+                component: () => import('@/views/about/ServiceIndex.vue'),
+                meta: {
+                    id: 2023032402,
+                    title: '服务与维修',
+                    isLink: false,
+                    linkUrl: '',
+                    isHide: false,
+                    isKeepAlive: true,
+                    isAffix: false,
+                    isIframe: false,
+                    roles: ['admin', 'common'],
+                    icon: 'ele-Menu',
+                },
+            },
+            {
                 path: '/recruit',
-                name: 'NewsCompany',
-                component: () => import('@/views/news/NewsCompany.vue'),
+                name: 'recruit',
+                component: () => import('@/views/about/RecruitIndex.vue'),
                 meta: {
                     id: 2023032402,
                     title: '人才招聘',
@@ -121,23 +138,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
                     icon: 'ele-Menu',
                 },
             },
-            // {
-            //     path: '/technical',
-            //     name: 'NewsTechnical',
-            //     component: () => import('@/views/news/NewsTechnical.vue'),
-            //     meta: {
-            //         id: 2023032402,
-            //         title: '技术支持',
-            //         isLink: false,
-            //         linkUrl: '',
-            //         isHide: false,
-            //         isKeepAlive: true,
-            //         isAffix: false,
-            //         isIframe: false,
-            //         roles: ['admin', 'common'],
-            //         icon: 'ele-Menu',
-            //     },
-            // },
+
             {
                 path: '/menu',
                 name: 'SystemMenu',

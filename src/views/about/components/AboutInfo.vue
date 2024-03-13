@@ -19,7 +19,17 @@
                     </el-form-item>
                 </el-col>
             </template>
-            <el-col v-if="props.type !== 'culture'" :xs="24" :sm="24" :md="20" :lg="18" :xl="16" class="mb18px">
+            <el-col v-if="props.type === 'service-mend'" :xs="24" :sm="24" :md="20" :lg="18" :xl="16" class="mb18px">
+                <el-form-item v-if="lang === 'cn'" prop="subtitle" label="副标题：">
+                    <el-input v-model="form.data.subtitle" maxlength="100" clearable />
+                </el-form-item>
+                <el-form-item v-else-if="lang === 'en'" prop="subtitle_en" label="英文副标题名称：">
+                    <el-input v-model="form.data.subtitle_en" maxlength="100" clearable />
+                </el-form-item>
+            </el-col>
+            <el-col
+                v-if="!(props.type === 'culture' || props.type === 'recruit-cultivate' || props.type === 'service-mend')"
+                :xs="24" :sm="24" :md="20" :lg="18" :xl="16" class="mb18px">
                 <el-form-item prop="img" label="图片：">
                     <UploadFile v-model="form.data.img" />
                 </el-form-item>
@@ -53,7 +63,7 @@ import { useLoadingSubmit } from '@/hooks/useLoadingSubmit'
 import { getOtherInfo, setOtherInfoUpdate } from '@/api/list'
 
 const props = defineProps<{
-    type?: 'about' | 'organization' | 'culture'
+    type?: IOtherType
 }>()
 
 const lang = ref<LanguageType>('cn')
@@ -64,21 +74,12 @@ const form = reactive({
     data: {
         title: '', // 公司名称
         title_en: '',
+        subtitle: '', // 公司地址
+        subtitle_en: '', // 公司地址
         content: '', // 公司地址
         content_en: '', // 公司地址
         img: '', // 网站logo
 
-        // logo2: '', // 网站logo
-        // qr_code: '', // 二维码
-        // seo_keyword: '', // 关键词
-        // seo_description: '', // 描述
-
-        // filing: '', // 备案号
-        // copyright: '', // 版权信息
-        // filing_en: '', // 备案号
-        // copyright_en: '', // 版权信息
-
-        // icon: '', // 网站图标
     },
 
 })
@@ -99,6 +100,8 @@ const initDefaultData = async () => {
 
     form.data.title = propsData?.title || ''
     form.data.title_en = propsData?.title_en || ''
+    form.data.subtitle = propsData?.subtitle || ''
+    form.data.subtitle_en = propsData?.subtitle_en || ''
     form.data.content = propsData?.content || ''
     form.data.content_en = propsData?.content_en || ''
     form.data.img = propsData?.img || ''
@@ -124,8 +127,9 @@ const onSubmit = async () => {
     const param: IOtherInfoUpdate = {
         title: form.data.title?.trim() ?? '',
         title_en: form.data.title_en?.trim() ?? '',
+        subtitle: form.data.subtitle?.trim() ?? '',
+        subtitle_en: form.data.subtitle_en?.trim() ?? '',
         content: form.data.content?.trim() ?? '',
-
         content_en: form.data.content_en?.trim() ?? '',
         img: form.data.img?.trim() ?? '',
         type: props.type,

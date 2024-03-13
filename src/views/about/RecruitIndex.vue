@@ -1,0 +1,9 @@
+<template>
+    <AboutIndex type="recruit" />
+</template>
+
+<script lang="ts" setup>
+import AboutIndex from '@/views/about/AboutIndex.vue'
+</script>
+
+<style lang="scss" scoped></style>

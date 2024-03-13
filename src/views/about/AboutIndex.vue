@@ -2,25 +2,61 @@
     <my-box class="b-none!">
         <!-- v-if="defData.ready" -->
         <div class="tab-box">
-            <el-tabs v-model="activeName" tab-position="left" @tab-click="handleClick">
-                <el-tab-pane label="关于我们" name="1">
+            <el-tabs v-if="props.type === 'recruit'" v-model="activeName" class="tab-box" tab-position="left"
+                @tab-click="handleClick">
+                <el-tab-pane label="人才招聘" name="1">
                     <el-scrollbar>
-                        <AboutInfo type="about" title="轮播图" />
+                        <AboutInfo type="recruit-person" />
                     </el-scrollbar>
                 </el-tab-pane>
-                <el-tab-pane label="关于我们-展示图" name="8" lazy>
+                <el-tab-pane label="人才招聘-岗位" name="5" lazy>
+                    <el-scrollbar>
+                        <RecruitList  title="人才招聘-岗位" />
+                    </el-scrollbar>
+                </el-tab-pane>
+                <el-tab-pane label="招聘须知" name="2" lazy>
+                    <el-scrollbar>
+                        <AboutInfo type="recruit-notice" />
+                    </el-scrollbar>
+                </el-tab-pane>
+                <el-tab-pane label="人才培养" name="3" lazy>
+                    <el-scrollbar>
+                        <AboutInfo type="recruit-cultivate" />
+                    </el-scrollbar>
+                </el-tab-pane>
+            </el-tabs>
+            <el-tabs v-else-if="props.type === 'service'" v-model="activeName" class="tab-box" tab-position="left"
+                @tab-click="handleClick">
+                <el-tab-pane label="资料下载" name="1">
+                    <el-scrollbar>
+                        <!-- <AboutInfo type="recruit-person" /> -->
+                    </el-scrollbar>
+                </el-tab-pane>
+                <el-tab-pane label="服务维修" name="2" lazy>
+                    <el-scrollbar>
+                        <AboutInfo type="service-mend" />
+                    </el-scrollbar>
+                </el-tab-pane>
+            </el-tabs>
+            <el-tabs v-else v-model="activeName" class="tab-box" tab-position="left" @tab-click="handleClick">
+                <el-tab-pane label="关于我们" name="1">
+                    <el-scrollbar>
+                        <AboutInfo type="about" />
+                    </el-scrollbar>
+                </el-tab-pane>
+                <el-tab-pane label="关于我们-展示图" name="5" lazy>
                     <el-scrollbar>
                         <IndexList :type="7" title="关于我们-展示图" />
                     </el-scrollbar>
                 </el-tab-pane>
                 <el-tab-pane label="企业文化" name="2" lazy>
                     <el-scrollbar>
-                        <AboutInfo type="culture" title="友情链接" />
+                        <AboutInfo type="culture" />
                     </el-scrollbar>
                 </el-tab-pane>
                 <el-tab-pane label="企业架构" name="3" lazy>
                     <el-scrollbar>
-                        <AboutInfo type="organization" title="友情链接" />
+                        <AboutInfo type="organization" />
                     </el-scrollbar>
                 </el-tab-pane>
                 <el-tab-pane label="荣誉资质" name="4" lazy>
@@ -38,6 +74,11 @@ import type { TabsPaneContext } from 'element-plus'
 
 import IndexList from '@/views/home/components/IndexList.vue'
 import AboutInfo from '@/views/about/components/AboutInfo.vue'
+import RecruitList from '@/views/about/components/RecruitList.vue'
+
+const props = defineProps<{
+    type?: string
+}>()
 
 const activeName = ref('1')
 
