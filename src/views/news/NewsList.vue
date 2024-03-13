@@ -1,5 +1,5 @@
 <template>
-    <NewsList :type="1" title="新闻" />
+    <NewsList type="1,2" title="新闻" />
 </template>
 
 <script lang="ts" setup>

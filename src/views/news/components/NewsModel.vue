@@ -14,17 +14,28 @@
                 <el-input v-model="form.data.title_en" maxlength="30" placeholder="请输入英文标题" clearable />
             </el-form-item>
 
-            <!-- <el-form-item label="发布者" prop="author">
+            <el-form-item label="新闻类型" prop="type">
+                <el-radio-group v-model="form.data.type">
+                    <el-radio :label="1">
+                        公司新闻
+                    </el-radio>
+                    <el-radio :label="2">
+                        行业新闻
+                    </el-radio>
+                </el-radio-group>
+            </el-form-item>
+
+            <el-form-item label="作者" prop="author">
                 <el-input v-model="form.data.author" maxlength="30" placeholder="请输入名称" clearable />
-            </el-form-item> -->
+            </el-form-item>
             <el-form-item :label="`${props.title}图片`" prop="img">
                 <UploadFile v-model="form.data.img" />
             </el-form-item>
 
             <template v-if="lang === 'cn'">
                 <el-form-item label="简介" prop="describe">
-                    <el-input v-model="form.data.describe" type="textarea" maxlength="180" show-word-limit placeholder=""
-                        clearable />
+                    <el-input v-model="form.data.describe" type="textarea" maxlength="180" show-word-limit
+                        placeholder="" clearable />
                 </el-form-item>
                 <el-form-item label="详细内容" prop="content">
                     <BaseWangEditor v-model="form.data.content" />
@@ -32,17 +43,17 @@
             </template>
             <template v-else-if="lang === 'en'">
                 <el-form-item label="英文简介" prop="describe_en">
-                    <el-input v-model="form.data.describe_en" type="textarea" maxlength="180" show-word-limit placeholder=""
-                        clearable />
+                    <el-input v-model="form.data.describe_en" type="textarea" maxlength="180" show-word-limit
+                        placeholder="" clearable />
                 </el-form-item>
                 <el-form-item label="英文详细内容" prop="content_en">
                     <BaseWangEditor v-model="form.data.content_en" />
                 </el-form-item>
             </template>
-            <el-form-item label="阅读量" prop="read">
+            <!-- <el-form-item label="阅读量" prop="read">
                 <el-input-number v-model="form.data.read" :precision="0" :min="0" :max="10 ** 14"
                     controls-position="right" />
-            </el-form-item>
+            </el-form-item> -->
             <el-form-item label="首页推荐" prop="isHide">
                 <el-radio-group v-model="form.data.isHide">
                     <el-radio :label="true">
@@ -69,7 +80,7 @@ import { useLoadingSubmit } from '@/hooks/useLoadingSubmit'
 import { setNewsAdd, setNewsUpdate } from '@/api/list'
 
 const props = defineProps<{
-    type: number
+    type: number | string
     title: string
 }>()
 
@@ -103,6 +114,7 @@ const form = reactive({
 
         sort: 0, // 排序
         read: 0, // 阅读量
+        type: 1,
     },
 })
 
@@ -135,6 +147,7 @@ const openDialog = async (row?: INewsGetListResponse['list'][0]) => {
         form.data.id = row.id
         form.data.title = row.title
         form.data.title_en = row.title_en
+        form.data.type = row.type || 1
 
         form.data.author = row.author
         form.data.describe = row.describe
@@ -151,6 +164,7 @@ const openDialog = async (row?: INewsGetListResponse['list'][0]) => {
         form.data.id = 0
         form.data.title = ''
         form.data.title_en = ''
+        form.data.type = 1
 
         form.data.author = ''
         form.data.describe = ''
@@ -195,7 +209,7 @@ const onConfirm = useThrottleFn(async () => {
         content: form.data.content?.trim() ?? '',
         content_en: form.data.content_en?.trim() ?? '',
         isHide: form.data.isHide,
-        type: props.type,
+        type: form.data.type,
         read: form.data.read || 0,
     }
 

@@ -92,7 +92,7 @@ declare interface IOtherInfoUpdate {
  * 新闻列表 - 请求参数
  */
 declare interface INewsGetList extends ListPage {
-    type: number;    // 类型
+    type: number|string;    // 类型
     title?: string;  // 标题
 }
 
@@ -112,7 +112,7 @@ declare interface INewsGetListResponse extends ListTotal {
         "img": "http://localhost:9008/upload/2023/8/31/1693465126951cbycq5.png",
         "sort": 0,
         "isHide": boolean,
-        "type": 1,
+        "type": 1|2,
         "createdAt": "2023-08-31T06:59:35.000Z",
         "updatedAt": "2023-08-31T06:59:35.000Z"
     }[]
