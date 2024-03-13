@@ -26,6 +26,8 @@ declare interface MenuApi_MenuItem {
     "updatedAt": "2023-08-30T09:25:40.000Z",
     "children"?: MenuApi_MenuItem[],
     status?: 0 | 1,    // 0: 禁用, 1: 启用
+    is_goods?: 0 | 1,  // 是否关联商品
+    img: string
 }
 
 /**
@@ -39,6 +41,8 @@ declare interface MenuApi_Add {
     "title_en": string,
     status: 0 | 1
     "icon"?: string,
+    is_goods: 0 | 1
+    img: string
 }
 
 /**

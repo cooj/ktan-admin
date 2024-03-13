@@ -118,6 +118,8 @@ const uploadFile = async () => {
         // return item.code === 200 ? item.data.src : ''
     })
 
+    emitsUpdate(uploadList.value)
+
     return true
 }
 
@@ -134,6 +136,7 @@ watch(files, async (val) => {
 // 更新图片
 const emitsUpdate = (arr: string[]) => {
     const val = Array.isArray(props.modelValue) ? arr : arr[0] || ''
+    console.log('val :>> ', val)
     emits('update:modelValue', val)
 }
 

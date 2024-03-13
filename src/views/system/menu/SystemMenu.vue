@@ -8,30 +8,33 @@
                 新增菜单
             </el-button>
         </my-form-tool>
-        <MyTable ref="myTableRef" v-model:page="tableData.pagination" v-model:table-header="tableData.tableHeader"
-            class="jm-box table-box" :data="tableData.data" :row-class-name="setRowClassName" row-key="id"
-            :tree-props="{ children: 'children', hasChildren: 'hasChildren' }" :default-expand-all="defData.expand"
-            @update:page="onHandleCurrentChange" @row-click="rowClick">
-            <template #status="{ scopes }">
-                <el-tag v-if="scopes.row.status" size="small" type="success">
-                    显示
-                </el-tag>
-                <el-tag v-else size="small" type="info">
-                    隐藏
-                </el-tag>
-            </template>
-            <template #operate="{ scopes }">
-                <el-button size="small" text type="primary" @click.stop="onOpenAddMenu(scopes.row)">
-                    新增
-                </el-button>
-                <el-button size="small" text type="primary" @click.stop="onOpenEditMenu(scopes.row)">
-                    修改
-                </el-button>
-                <el-button size="small" text type="primary" @click.stop="onRowDel(scopes.row)">
-                    删除
-                </el-button>
-            </template>
-        </MyTable>
+        <div class="min-h-0 flex-1">
+            <CoTable ref="myTableRef" v-model:option="tableData"
+                class="table-box" :data="tableData.data" :row-class-name="setRowClassName" row-key="id"
+                :tree-props="{ children: 'children', hasChildren: 'hasChildren' }" :default-expand-all="defData.expand"
+                @pagination="onHandleCurrentChange" @row-click="rowClick">
+                <template #status="{ row }">
+                    <el-tag v-if="row.status" size="small" type="success">
+                        显示
+                    </el-tag>
+                    <el-tag v-else size="small" type="info">
+                        隐藏
+                    </el-tag>
+                </template>
+                <template #operate="{ row }">
+                    <el-button size="small" text type="primary" @click.stop="onOpenAddMenu(row)">
+                        新增
+                    </el-button>
+                    <el-button size="small" text type="primary" @click.stop="onOpenEditMenu(row)">
+                        修改
+                    </el-button>
+                    <el-button size="small" text type="primary" @click.stop="onRowDel(row)">
+                        删除
+                    </el-button>
+                </template>
+            </CoTable>
+        </div>
+
         <MenuModel ref="modelRef" :data="defData.menuData" @update="initTableData" />
     </my-box>
 </template>
@@ -70,7 +73,7 @@ const searchData = reactive<SearchDataType<FormSearchData>>({
 })
 
 type TableDataItem = MenuApi_MenuItem
-const tableData = reactive<TableType<TableDataItem>>({
+const tableData = reactive<CoTableProps<TableDataItem>>({
     data: [],
     tableHeader: [
         { property: 'id', label: 'id', width: 100 },
@@ -78,9 +81,9 @@ const tableData = reactive<TableType<TableDataItem>>({
         { property: 'title_en', label: '英文菜单名称', minWidth: 150 },
         { property: 'href', label: '链接地址', minWidth: 150 },
         // { property: 'redirect', label: '重定向', width: 200 },
-        { property: 'status', label: '状态', width: 100, align: 'center', slot: true },
+        { property: 'status', label: '状态', width: 100, align: 'center' },
         { property: 'sort', label: '排序', width: 100, align: 'center' },
-        { property: 'operate', label: '操作', width: 130, fixed: 'right', align: 'center', slot: true },
+        { property: 'operate', label: '操作', width: 130, fixed: 'right', align: 'center' },
     ],
     pagination: {
         ...PAGINATION,

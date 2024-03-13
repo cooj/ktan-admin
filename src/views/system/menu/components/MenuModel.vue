@@ -20,17 +20,30 @@
                 <el-input v-model="form.data.title_en" maxlength="30" placeholder="请输入英文菜单名称" clearable />
             </el-form-item>
             <el-form-item label="链接地址" prop="href">
-                <el-select v-model="form.data.href" clearable filterable allow-create :disabled="defData.type === 2" >
+                <el-select v-model="form.data.href" clearable filterable allow-create :disabled="defData.type === 2">
                     <el-option v-for="(item, index) in defData.hrefList" :key="index" :label="item" :value="item" />
                 </el-select>
+            </el-form-item>
+            <el-form-item label="横栏图片" :prop="`${!form.data.p_id && form.data.href !== '/' ? 'img' : ''}`">
+                <CoUploadImage v-model="form.data.img" :limit="1" />
+            </el-form-item>
+            <el-form-item label="关联商品分类" prop="is_goods">
+                <el-radio-group v-model="form.data.is_goods">
+                    <el-radio :label="1">
+                        是
+                    </el-radio>
+                    <el-radio :label="0">
+                        否
+                    </el-radio>
+                </el-radio-group>
             </el-form-item>
             <el-form-item label="排序">
                 <el-input-number v-model="form.data.sort" :min="0" :max="10000" controls-position="right" placeholder=""
                     class="w100%" />
             </el-form-item>
             <el-form-item label="状态">
-                <el-switch v-model="form.data.status" inline-prompt active-text="显示" inactive-text="隐藏" :active-value="1"
-                    :inactive-value="0" />
+                <el-switch v-model="form.data.status" inline-prompt active-text="显示" inactive-text="隐藏"
+                    :active-value="1" :inactive-value="0" />
             </el-form-item>
         </el-form>
     </co-drawer>
@@ -82,6 +95,8 @@ const form = reactive({
         href: '', // 链接地址
         sort: 0, // 排序
         status: 1,
+        is_goods: 0,
+        img: '',
     },
 })
 
@@ -99,7 +114,9 @@ const rules = reactive<FormRules>({
         // { required: true, pattern: /^(\/([A-Za-z0-9_-]*))+$/, message: '以/开头,后面为字母或数字,不能有空格', trigger: 'blur' },
         { required: true, whitespace: true, message: '必填项不能为空', trigger: 'blur' },
     ],
-
+    img: [ // 图片
+        { required: true, whitespace: true, message: '必填项不能为空' },
+    ],
 })
 
 const comData = computed(() => {
@@ -124,6 +141,8 @@ const openDialog = async (row?: MenuApi_MenuItem | number) => {
         form.data.title_en = ''
         form.data.href = ''
         form.data.sort = 0
+        form.data.is_goods = 0
+        form.data.img = ''
 
         form.data.p_id = typeof row === 'number' ? row : ''
     } else if (row) { // 修改
@@ -139,6 +158,9 @@ const openDialog = async (row?: MenuApi_MenuItem | number) => {
         form.data.sort = row.sort
         form.data.p_id = row.p_id || ''
         form.data.status = row.status ? 1 : 0
+        form.data.is_goods = row.is_goods || 0
+
+        form.data.img = row.img || ''
     }
 
     defData.routeArr = arr
@@ -171,6 +193,8 @@ const onConfirm = useThrottleFn(async () => {
         title: form.data.title?.trim() ?? '',
         title_en: form.data.title_en?.trim() ?? '',
         status: form.data.status ? 1 : 0,
+        is_goods: form.data.is_goods ? 1 : 0,
+        img: form.data.img?.trim() ?? '',
     }
 
     if (defData.type === 1) {
