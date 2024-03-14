@@ -11,7 +11,7 @@
                 </el-tab-pane>
                 <el-tab-pane label="人才招聘-岗位" name="5" lazy>
                     <el-scrollbar>
-                        <RecruitList  title="人才招聘-岗位" />
+                        <RecruitList title="人才招聘-岗位" />
                     </el-scrollbar>
                 </el-tab-pane>
                 <el-tab-pane label="招聘须知" name="2" lazy>
@@ -30,6 +30,7 @@
                 <el-tab-pane label="资料下载" name="1">
                     <el-scrollbar>
                         <!-- <AboutInfo type="recruit-person" /> -->
+                        <FileList type="2,3,4" title="资料文件" />
                     </el-scrollbar>
                 </el-tab-pane>
                 <el-tab-pane label="服务维修" name="2" lazy>
@@ -72,13 +73,19 @@
 <script lang="ts" setup>
 import type { TabsPaneContext } from 'element-plus'
 
-import IndexList from '@/views/home/components/IndexList.vue'
-import AboutInfo from '@/views/about/components/AboutInfo.vue'
-import RecruitList from '@/views/about/components/RecruitList.vue'
+// import IndexList from '@/views/home/components/IndexList.vue'
+// import AboutInfo from '@/views/about/components/AboutInfo.vue'
+// import RecruitList from '@/views/about/components/RecruitList.vue'
+// import FileList from '@/views/about/components/FileList.vue'
 
 const props = defineProps<{
     type?: string
 }>()
+
+const IndexList = defineAsyncComponent(() => import('@/views/home/components/IndexList.vue'))
+const AboutInfo = defineAsyncComponent(() => import('@/views/about/components/AboutInfo.vue'))
+const RecruitList = defineAsyncComponent(() => import('@/views/about/components/RecruitList.vue'))
+const FileList = defineAsyncComponent(() => import('@/views/about/components/FileList.vue'))
 
 const activeName = ref('1')
 

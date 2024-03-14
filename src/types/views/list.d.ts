@@ -4,7 +4,10 @@
  * 轮播图列表 - 响应数据
  */
 declare interface IBannerGetList extends ListPage {
-    type: 1 | 2 | 5 | 6 | 7,   // 5:轮播图 2：友情链接 6：荣誉资质,7: 关于我们展示图
+    // type: 1 | 2 | 5 | 6 | 7,   // 5:轮播图 2：友情链接 6：荣誉资质,7: 关于我们展示图
+    type: number | string,   // 5:轮播图 2：友情链接 6：荣誉资质,7: 关于我们展示图
+    title?: string
+    goods_id?: string | number
 }
 
 
@@ -21,6 +24,7 @@ declare interface IBannerGetListResponse extends ListTotal {
         sort: number;    // 排序
         type: number;    // 类型 1:轮播图，2：友情链接
         isHide: boolean; //是否隐藏
+        content:string
     }[]
 }
 
@@ -36,6 +40,8 @@ declare interface IBannerAdd {
     sort: number;    // 排序
     isHide: boolean; //是否隐藏
     type: number;    // 类型 1:轮播图，2：友情链接
+    productId?: number | ''
+    content?:string
 }
 
 
