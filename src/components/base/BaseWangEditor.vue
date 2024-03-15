@@ -1,9 +1,10 @@
 <template>
     <div class="wang-editor-box">
         <Toolbar :editor="editorRef" :default-config="toolbarConfig" :mode="mode" class="wang-editor-tool" />
-        <Editor v-model="valueHtml" :default-config="editorConfig" :mode="mode" style="height: 350px; overflow-y: hidden"
-            @on-created="handleCreated" @on-change="handleChange" @on-destroyed="handleDestroyed" @on-focus="handleFocus"
-            @on-blur="handleBlur" @custom-alert="customAlert" @custom-paste="customPaste" />
+        <Editor v-model="valueHtml" :default-config="editorConfig" :mode="mode"
+            :style="`height: ${props.height}px;overflow-y: hidden`" @on-created="handleCreated"
+            @on-change="handleChange" @on-destroyed="handleDestroyed" @on-focus="handleFocus" @on-blur="handleBlur"
+            @custom-alert="customAlert" @custom-paste="customPaste" />
     </div>
 </template>
 
@@ -19,6 +20,10 @@ const props = defineProps({
     modelValue: {
         type: String,
         default: '',
+    },
+    height: {
+        type: Number,
+        default: 350,
     },
 })
 

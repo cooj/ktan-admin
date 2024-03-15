@@ -8,16 +8,16 @@
                         <SetBasic :data="companyInfo" />
                     </el-scrollbar>
                 </el-tab-pane>
-                <el-tab-pane label="关于我们" name="2" lazy>
+                <el-tab-pane label="SEO设置" name="2" lazy>
                     <el-scrollbar>
-                        <SetAbout />
+                        <SetBasic :data="companyInfo" :type="2" />
                     </el-scrollbar>
                 </el-tab-pane>
-                <el-tab-pane label="联系我们" name="3" lazy>
+                <!-- <el-tab-pane label="联系我们" name="3" lazy>
                     <el-scrollbar>
                         <SetContact />
                     </el-scrollbar>
-                </el-tab-pane>
+                </el-tab-pane> -->
             </el-tabs>
         </div>
     </my-box>
