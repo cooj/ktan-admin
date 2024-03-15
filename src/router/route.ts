@@ -138,7 +138,23 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
                     icon: 'ele-Menu',
                 },
             },
-
+            {
+                path: '/message',
+                name: 'message',
+                component: () => import('@/views/about/MessageIndex.vue'),
+                meta: {
+                    id: 2023032402,
+                    title: '客户留言',
+                    isLink: false,
+                    linkUrl: '',
+                    isHide: false,
+                    isKeepAlive: true,
+                    isAffix: false,
+                    isIframe: false,
+                    roles: ['admin', 'common'],
+                    icon: 'ele-Menu',
+                },
+            },
             {
                 path: '/menu',
                 name: 'SystemMenu',

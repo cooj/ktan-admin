@@ -5,20 +5,14 @@
             <el-tab-pane label="英文" name="en" />
         </el-tabs>
         <el-row>
-            <template v-if="lang === 'cn'">
-                <el-col :xs="24" :sm="24" :md="20" :lg="18" :xl="16" class="mb18px">
-                    <el-form-item prop="title" label="标题：">
-                        <el-input v-model="form.data.title" maxlength="100" clearable />
-                    </el-form-item>
-                </el-col>
-            </template>
-            <template v-else-if="lang === 'en'">
-                <el-col :xs="24" :sm="24" :md="20" :lg="18" :xl="16" class="mb18px">
-                    <el-form-item prop="title_en" label="英文标题名称：">
-                        <el-input v-model="form.data.title_en" maxlength="100" clearable />
-                    </el-form-item>
-                </el-col>
-            </template>
+            <el-col :xs="24" :sm="24" :md="20" :lg="18" :xl="16" class="mb18px">
+                <el-form-item v-if="lang === 'cn'" prop="title" label="标题：">
+                    <el-input v-model="form.data.title" maxlength="100" clearable />
+                </el-form-item>
+                <el-form-item v-else-if="lang === 'en'" prop="title_en" label="英文标题名称：">
+                    <el-input v-model="form.data.title_en" maxlength="100" clearable />
+                </el-form-item>
+            </el-col>
             <el-col v-if="props.type === 'service-mend'" :xs="24" :sm="24" :md="20" :lg="18" :xl="16" class="mb18px">
                 <el-form-item v-if="lang === 'cn'" prop="subtitle" label="副标题：">
                     <el-input v-model="form.data.subtitle" maxlength="100" clearable />

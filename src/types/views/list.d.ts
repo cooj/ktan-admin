@@ -24,7 +24,7 @@ declare interface IBannerGetListResponse extends ListTotal {
         sort: number;    // 排序
         type: number;    // 类型 1:轮播图，2：友情链接
         isHide: boolean; //是否隐藏
-        content:string
+        content: string
     }[]
 }
 
@@ -41,7 +41,7 @@ declare interface IBannerAdd {
     isHide: boolean; //是否隐藏
     type: number;    // 类型 1:轮播图，2：友情链接
     productId?: number | ''
-    content?:string
+    content?: string
 }
 
 
@@ -378,5 +378,55 @@ declare interface IGoodsClassifyEdit extends IGoodsClassifyAdd {
 
 
 
-declare type IOtherType = 'about' | 'organization' | 'culture' | 'recruit-person' | 'recruit-notice' | 'recruit-cultivate' | 'service-mend'
+
+/**
+ * 新闻列表 - 请求参数
+ */
+declare interface IMessageGetList extends ListPage {
+    type?: number | string;    // 类型
+    title?: string;  // 标题
+    status?: string | number
+}
+
+/**
+ * 新闻列表 - 响应数据
+ */
+declare interface IMessageGetListResponse extends ListTotal {
+    list: {
+        "id": 1,
+        "title": "张三",
+        "phone": "18064569123",
+        "email": "1@1.com",
+        "address": "深圳市光明区新湖街道108号",
+        "content": "我说的是啊啊健康",
+        "status": number,
+        "createdAt": "2024-03-15T02:22:13.327Z",
+        "updatedAt": "2024-03-15T02:22:13.327Z"
+    }[]
+}
+
+/**
+ * 新闻列表 - 添加
+ */
+declare interface IMessageAdd {
+    title: string,  // 标题
+
+    phone: string; // 图片地址
+    address: string;  // 作者
+    email: string;  // 作者
+    content: string; // 内容
+    status: number;    // 排序
+}
+
+/**
+ * 新闻列表 - 修改
+ */
+declare interface IMessageEdit extends IMessageAdd {
+    id: number
+}
+
+
+
+
+declare type IOtherType = 'about' | 'organization' | 'culture' | 'recruit-person' | 'recruit-notice' | 'recruit-cultivate' | 'service-mend' | 'message'
 

@@ -25,6 +25,19 @@
                     </el-scrollbar>
                 </el-tab-pane>
             </el-tabs>
+            <el-tabs v-else-if="props.type === 'message'" v-model="activeName" class="tab-box" tab-position="left"
+                @tab-click="handleClick">
+                <el-tab-pane label="留言列表" name="1">
+                    <el-scrollbar>
+                        <MessageList title="留言" />
+                    </el-scrollbar>
+                </el-tab-pane>
+                <el-tab-pane label="留言显示设置" name="2" lazy>
+                    <el-scrollbar>
+                        <AboutInfo type="message" />
+                    </el-scrollbar>
+                </el-tab-pane>
+            </el-tabs>
             <el-tabs v-else-if="props.type === 'service'" v-model="activeName" class="tab-box" tab-position="left"
                 @tab-click="handleClick">
                 <el-tab-pane label="资料下载" name="1">
@@ -86,6 +99,7 @@ const IndexList = defineAsyncComponent(() => import('@/views/home/components/Ind
 const AboutInfo = defineAsyncComponent(() => import('@/views/about/components/AboutInfo.vue'))
 const RecruitList = defineAsyncComponent(() => import('@/views/about/components/RecruitList.vue'))
 const FileList = defineAsyncComponent(() => import('@/views/about/components/FileList.vue'))
+const MessageList = defineAsyncComponent(() => import('@/views/about/components/MessageList.vue'))
 
 const activeName = ref('1')
 

@@ -52,3 +52,13 @@ export const setRecruitAdd = (data: IRecruitAdd) => post('/api/recruit/add', dat
 export const setRecruitUpdate = (data: IRecruitEdit) => post('/api/recruit/edit', data)
 // 删除人才招聘
 export const setRecruitDelete = (data: { id: number }) => post('/api/recruit/delete', data)
+
+// 、、、   ///
+// 获取留言列表
+export const getMessageList = (data?: IMessageGetList) => post<IMessageGetListResponse>('/api/message/get_list', data)
+// 添加留言
+export const setMessageAdd = (data: IMessageAdd) => post('/api/message/add', data)
+// 修改留言
+export const setMessageUpdate = (data: IMessageEdit) => post('/api/message/edit', data)
+// 删除留言
+export const setMessageDelete = (data: { id: number }) => post('/api/message/delete', data)
