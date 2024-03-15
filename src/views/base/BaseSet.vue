@@ -25,10 +25,7 @@
 
 <script lang="ts" setup>
 import type { TabsPaneContext } from 'element-plus'
-import { ElMessage } from 'element-plus'
 import SetBasic from '@/views/base/components/SetBasic.vue'
-import SetAbout from '@/views/base/components/SetAbout.vue'
-import SetContact from '@/views/base/components/SetContact.vue'
 
 const activeName = ref('1')
 

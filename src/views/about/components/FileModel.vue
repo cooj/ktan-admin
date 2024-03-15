@@ -78,11 +78,7 @@
 import { genFileId } from 'element-plus'
 import type { FormInstance, FormRules, UploadFile as UploadFileType, UploadFiles, UploadInstance, UploadProps, UploadRawFile } from 'element-plus'
 
-import { MainPage } from '@/router/layout'
-import { deepClone } from '@/utils/other'
-import { getParentId, setDisableTree } from '@/utils/common/tree'
-import { formErrorMessage, verifyFormData } from '@/utils/element/form'
-import { MenuApi } from '@/api/system/menu'
+import { verifyFormData } from '@/utils/element/form'
 import { useLoadingSubmit } from '@/hooks/useLoadingSubmit'
 import { setBannerAdd, setBannerUpdate } from '@/api/list'
 import { CommonApi } from '@/api/common'

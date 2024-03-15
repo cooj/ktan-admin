@@ -4,7 +4,7 @@
             <span class="el-dialog__title">
                 {{ props.title }}
             </span>
-            <button v-if="!props.hidden" class="dialog-full el-dialog__headerbtn" @click="onToggle">
+            <button v-if="!props.hidden" class="el-dialog__headerbtn dialog-full" @click="onToggle">
                 <SvgIcon class="el-dialog__close" :class="{ active: iconName === 'ele-CopyDocument' }" :name="iconName" />
             </button>
         </template>

@@ -62,8 +62,7 @@ import type { FormInstance, FormRules } from 'element-plus'
 
 import { verifyFormData } from '@/utils/element/form'
 import { useLoadingSubmit } from '@/hooks/useLoadingSubmit'
-import { setGoodsAdd, setGoodsUpdate, setRecruitAdd, setRecruitUpdate } from '@/api/list'
-import { PAGINATION } from '@/config/global'
+import { setRecruitAdd, setRecruitUpdate } from '@/api/list'
 
 const props = defineProps<{
     // type: number

@@ -40,7 +40,7 @@
 import LinkModel from '@/views/about/components/RecruitModel.vue'
 import { PAGINATION } from '@/config/global'
 
-import { getBannerList, getRecruitList, setBannerDelete, setRecruitDelete } from '@/api/list'
+import { getRecruitList, setRecruitDelete } from '@/api/list'
 
 const props = defineProps<{
     // type: 1 | 2 | 5 | 6 | 7

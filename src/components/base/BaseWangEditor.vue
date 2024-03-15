@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import '@wangeditor/editor/dist/css/style.css'
-import { onBeforeUnmount, onMounted, ref, shallowRef } from 'vue'
+import { onBeforeUnmount, ref, shallowRef } from 'vue'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import type { IEditorConfig } from '@wangeditor/editor'
 import { setSignRule } from '@/utils/http/crypto'

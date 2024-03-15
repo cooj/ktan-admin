@@ -21,8 +21,7 @@
                     <el-input v-model="form.data.subtitle_en" maxlength="100" clearable />
                 </el-form-item>
             </el-col>
-            <el-col
-                v-if="!(props.type === 'culture' || props.type === 'recruit-cultivate' || props.type === 'service-mend')"
+            <el-col v-if="!(props.type === 'culture' || props.type === 'recruit-cultivate' || props.type === 'service-mend')"
                 :xs="24" :sm="24" :md="20" :lg="18" :xl="16" class="mb18px">
                 <el-form-item prop="img" label="图片：">
                     <UploadFile v-model="form.data.img" />
@@ -52,7 +51,6 @@
 
 <script setup lang="ts">
 import type { FormInstance, FormRules } from 'element-plus'
-import { setSystemInfo } from '@/api/system'
 import { useLoadingSubmit } from '@/hooks/useLoadingSubmit'
 import { getOtherInfo, setOtherInfoUpdate } from '@/api/list'
 

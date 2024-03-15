@@ -38,8 +38,7 @@ import type { FormInstance, FormRules } from 'element-plus'
 
 import { verifyFormData } from '@/utils/element/form'
 import { useLoadingSubmit } from '@/hooks/useLoadingSubmit'
-import { setGoodsAdd, setGoodsUpdate, setMessageAdd, setMessageUpdate, setRecruitAdd, setRecruitUpdate } from '@/api/list'
-import { PAGINATION } from '@/config/global'
+import { setMessageAdd, setMessageUpdate } from '@/api/list'
 
 const props = defineProps<{
     // type: number

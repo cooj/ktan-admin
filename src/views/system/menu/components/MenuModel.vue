@@ -51,10 +51,9 @@
 
 <script lang="ts" setup>
 import type { FormInstance, FormRules } from 'element-plus'
-import { MainPage } from '@/router/layout'
 import { deepClone } from '@/utils/other'
-import { getParentId, setDisableTree } from '@/utils/common/tree'
-import { formErrorMessage, verifyFormData } from '@/utils/element/form'
+import { setDisableTree } from '@/utils/common/tree'
+import { verifyFormData } from '@/utils/element/form'
 import { MenuApi } from '@/api/system/menu'
 import { useLoadingSubmit } from '@/hooks/useLoadingSubmit'
 

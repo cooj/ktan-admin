@@ -50,7 +50,6 @@
 import NewsModel from './NewsModel.vue'
 import { PAGINATION } from '@/config/global'
 import { getGoodsClassifyList, getGoodsList, setGoodsDelete } from '@/api/list'
-import { MenuApi } from '@/api/system/menu'
 
 const props = defineProps<{
     // type: number

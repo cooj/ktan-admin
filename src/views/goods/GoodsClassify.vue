@@ -38,8 +38,7 @@
 <script lang="ts" setup>
 import NewsModel from './components/ClassifyModel.vue'
 import { PAGINATION } from '@/config/global'
-import { getGoodsClassifyList, getGoodsList, setGoodsClassifyDelete, setGoodsDelete } from '@/api/list'
-import { MenuApi } from '@/api/system/menu'
+import { getGoodsClassifyList, setGoodsClassifyDelete } from '@/api/list'
 
 const state = reactive<{
     // type: number

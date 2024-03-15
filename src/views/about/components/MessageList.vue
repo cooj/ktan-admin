@@ -47,7 +47,7 @@
 import LinkModel from '@/views/about/components/MessageModel.vue'
 import { PAGINATION } from '@/config/global'
 
-import { getBannerList, getGoodsList, getMessageList, setBannerDelete, setMessageDelete } from '@/api/list'
+import { getMessageList, setMessageDelete } from '@/api/list'
 import { formatDate } from '@/utils/common/formatTime'
 
 const props = defineProps<{
