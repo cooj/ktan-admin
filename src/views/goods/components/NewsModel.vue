@@ -65,7 +65,17 @@
                     <BaseWangEditor v-if="defData.editShow" v-model="form.data.annex_en" />
                 </el-form-item>
             </template>
-            <el-form-item label="热门产品" prop="isHide">
+            <el-form-item label="热门产品" prop="isHot">
+                <el-radio-group v-model="form.data.isHot">
+                    <el-radio :label="true">
+                        是
+                    </el-radio>
+                    <el-radio :label="false">
+                        否
+                    </el-radio>
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item label="是否隐藏" prop="isHide">
                 <el-radio-group v-model="form.data.isHide">
                     <el-radio :label="true">
                         是
@@ -174,7 +184,7 @@ const form = reactive({
 
         img: [] as string[], // 图片
         isHide: false, // 是否首页显示，默认否
-
+        isHot: true, // 是否首页显示，默认否
         sort: 0, // 排序
         read: 0, // 阅读量
         type: '' as '' | number, // 分类id
@@ -297,9 +307,10 @@ const openDialog = async (row?: IGoodsGetListResponse['list'][0]) => {
         form.data.annex_en = row.annex_en || ''
 
         form.data.isHide = row.isHide
+        form.data.isHot = row.isHot
         form.data.sort = row.sort
 
-        form.data.type = row.type || ''
+        form.data.type = row.classifyId || ''
         form.data.read = row.read || 0
     } else {
         defData.type = 1
@@ -323,6 +334,7 @@ const openDialog = async (row?: IGoodsGetListResponse['list'][0]) => {
         form.data.annex_en = ''
 
         form.data.isHide = false
+        form.data.isHot = false
         form.data.sort = 0
 
         form.data.type = ''
@@ -383,6 +395,7 @@ const onConfirm = useThrottleFn(async () => {
         content: form.data.content?.trim() ?? '',
         content_en: form.data.content_en?.trim() ?? '',
         isHide: form.data.isHide,
+        isHot: form.data.isHot,
         type: 0,
         read: form.data.read || 0,
         img: '',

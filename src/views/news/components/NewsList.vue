@@ -26,12 +26,20 @@
                         公司新闻
                     </el-tag>
                 </template>
-                <template #isHide="{ row }">
-                    <el-tag v-if="row.isHide" type="info">
+                <template #isHot="{ row }">
+                    <el-tag v-if="row.isHot" type="success">
+                        是
+                    </el-tag>
+                    <el-tag v-else type="info">
                         否
                     </el-tag>
-                    <el-tag v-else type="">
+                </template>
+                <template #isHide="{ row }">
+                    <el-tag v-if="row.isHide" type="info">
                         是
+                    </el-tag>
+                    <el-tag v-else type="warning">
+                        否
                     </el-tag>
                 </template>
                 <template #operate="{ row }">
@@ -94,8 +102,9 @@ const tableData = reactive<CoTableProps<TableDataItem>>({
         { property: 'id', label: 'id', width: 70 },
         { property: 'img', label: '图片', width: 100, align: 'center' },
         { property: 'title', label: '标题名称', minWidth: 150 },
-        { property: 'type', label: '类型', width: 150, align: 'center' },
-        { property: 'isHide', label: '首页推荐', width: 150, align: 'center' },
+        { property: 'type', label: '类型', width: 120, align: 'center' },
+        { property: 'isHot', label: '首页推荐', width: 85, align: 'center' },
+        { property: 'isHide', label: '是否隐藏', width: 85, align: 'center' },
         // { property: 'redirect', label: '重定向', width: 200 },
         // { property: 'page_path', label: '组件路径', width: 200 },
         { property: 'sort', label: '排序', width: 100, align: 'center' },

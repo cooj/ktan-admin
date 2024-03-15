@@ -23,6 +23,14 @@
                 <template #type="{ row }">
                     {{ row.classify?.title }}
                 </template>
+                <template #isHot="{ row }">
+                    <el-tag v-if="row.isHot" type="success">
+                        是
+                    </el-tag>
+                    <el-tag v-else type="info">
+                        否
+                    </el-tag>
+                </template>
                 <template #isHide="{ row }">
                     <el-tag v-if="row.isHide" type="">
                         是
@@ -92,7 +100,8 @@ const tableData = reactive<CoTableProps<TableDataItem>>({
         { property: 'title', label: '标题名称', minWidth: 150 },
         { property: 'sub_title', label: '副标题名称', minWidth: 120 },
         { property: 'type', label: '分类名称', width: 180 },
-        { property: 'isHide', label: '是否热门', width: 100, align: 'center' },
+        { property: 'isHot', label: '是否热门', width: 85, align: 'center' },
+        { property: 'isHide', label: '是否隐藏', width: 85, align: 'center' },
         // { property: 'redirect', label: '重定向', width: 200 },
         // { property: 'page_path', label: '组件路径', width: 200 },
         { property: 'sort', label: '排序', width: 100, align: 'center' },

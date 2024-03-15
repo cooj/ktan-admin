@@ -122,6 +122,7 @@ declare interface INewsGetListResponse extends ListTotal {
         "img": "http://localhost:9008/upload/2023/8/31/1693465126951cbycq5.png",
         "sort": 0,
         "isHide": boolean,
+        isHot: boolean; //是否首页显示
         "type": 1 | 2,
         "createdAt": "2023-08-31T06:59:35.000Z",
         "updatedAt": "2023-08-31T06:59:35.000Z"
@@ -144,6 +145,7 @@ declare interface INewsAdd {
     content_en: string; // 内容
 
     isHide: boolean; //是否首页显示
+    isHot: boolean; //是否首页显示
     sort: number;    // 排序
 
     type: number;    // 类型 1:新闻
@@ -249,7 +251,8 @@ declare interface IGoodsGetListResponse extends ListTotal {
         "annex_en": string | null,
         "img": string | null,
         "sort": 0,
-        "isHide": false,
+        "isHide": boolean,
+        isHot: boolean,
         "type": 0,
         "read": 0,
         "createdAt": "2024-03-08T08:46:12.839Z",
@@ -280,6 +283,7 @@ declare interface IGoodsAdd {
     content_en: string; // 内容
 
     isHide: boolean; //是否首页显示
+    isHot: boolean; //是否热门
     sort: number;    // 排序
 
     type: number;    // 类型 1:新闻

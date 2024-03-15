@@ -54,7 +54,17 @@
                 <el-input-number v-model="form.data.read" :precision="0" :min="0" :max="10 ** 14"
                     controls-position="right" />
             </el-form-item> -->
-            <el-form-item label="首页推荐" prop="isHide">
+            <el-form-item label="首页推荐" prop="isHot">
+                <el-radio-group v-model="form.data.isHot">
+                    <el-radio :label="true">
+                        是
+                    </el-radio>
+                    <el-radio :label="false">
+                        否
+                    </el-radio>
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item label="是否隐藏" prop="isHide">
                 <el-radio-group v-model="form.data.isHide">
                     <el-radio :label="true">
                         是
@@ -111,6 +121,7 @@ const form = reactive({
         content_en: '',
         img: '', // 图片
         isHide: false, // 是否首页显示，默认否
+        isHot: false, // 是否首页显示，默认否
 
         sort: 0, // 排序
         read: 0, // 阅读量
@@ -158,6 +169,7 @@ const openDialog = async (row?: INewsGetListResponse['list'][0]) => {
         form.data.content_en = row.content_en
 
         form.data.isHide = row.isHide
+        form.data.isHot = row.isHot
         form.data.sort = row.sort
     } else {
         defData.type = 1
@@ -175,6 +187,7 @@ const openDialog = async (row?: INewsGetListResponse['list'][0]) => {
         form.data.content_en = ''
 
         form.data.isHide = false
+        form.data.isHot = false
         form.data.sort = 0
     }
 
@@ -209,6 +222,7 @@ const onConfirm = useThrottleFn(async () => {
         content: form.data.content?.trim() ?? '',
         content_en: form.data.content_en?.trim() ?? '',
         isHide: form.data.isHide,
+        isHot: form.data.isHot,
         type: form.data.type,
         read: form.data.read || 0,
     }
