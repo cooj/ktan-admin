@@ -21,7 +21,10 @@
                         preview-teleported fit="contain" class="ma h50px w60px block!" />
                 </template>
                 <template #type="{ row }">
-                    {{ row.classify?.title }}
+                    <div v-if="row.classify?.parent">
+                        {{ row.classify?.parent?.title }} / {{ row.classify?.title }}
+                    </div>
+                    <span v-else>{{ row.classify?.title }}</span>
                 </template>
                 <template #isHot="{ row }">
                     <el-tag v-if="row.isHot" type="success">
@@ -98,8 +101,8 @@ const tableData = reactive<CoTableProps<TableDataItem>>({
         { property: 'img', label: '图片', width: 100, align: 'center' },
 
         { property: 'title', label: '标题名称', minWidth: 150 },
-        { property: 'sub_title', label: '副标题名称', minWidth: 120 },
-        { property: 'type', label: '分类名称', width: 180 },
+        // { property: 'sub_title', label: '副标题名称', minWidth: 120 },
+        { property: 'type', label: '分类名称', minWidth: 120 },
         { property: 'isHot', label: '是否热门', width: 85, align: 'center' },
         { property: 'isHide', label: '是否隐藏', width: 85, align: 'center' },
         // { property: 'redirect', label: '重定向', width: 200 },
@@ -133,14 +136,14 @@ const initTableData = async () => {
     const res = await getGoodsList(data)
     if (res.code !== 200) return ElMessage.error(res.msg)
 
-    console.log(res)
+    // console.log(res)
 
     tableData.data = res.data.list
     tableData.pagination.total = res.data.total
 }
 
 // 获取商品分类名称
-const getGoodsImage = (row: IGoodsGetListResponse['list'][0]) => {
+const getGoodsImage = (row: TableDataItem) => {
     const node = row.links.find(item => item.type === 1)
     return node?.img || ''
 }
@@ -150,11 +153,11 @@ const onOpenAdd = () => {
     modelRef.value?.openDialog()
 }
 // 打开编辑菜单弹窗
-const onOpenEdit = (row: IGoodsGetListResponse['list'][0]) => {
+const onOpenEdit = (row: TableDataItem) => {
     modelRef.value?.openDialog(row)
 }
 // 删除当前行
-const onRowDel = (row: IGoodsGetListResponse['list'][0]) => {
+const onRowDel = (row: TableDataItem) => {
     ElMessageBox.confirm('此操作将永久删除该条内容, 是否继续?', '提示', {
         confirmButtonText: '删除',
         cancelButtonText: '取消',

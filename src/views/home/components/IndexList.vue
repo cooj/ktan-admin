@@ -48,7 +48,7 @@ import { PAGINATION } from '@/config/global'
 import { getBannerList, setBannerDelete } from '@/api/list'
 
 const props = defineProps<{
-    type: 1 | 2 | 5 | 6 | 7
+    type: number
     title: string
 }>()
 

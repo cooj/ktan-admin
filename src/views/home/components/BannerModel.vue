@@ -43,7 +43,7 @@ import { useLoadingSubmit } from '@/hooks/useLoadingSubmit'
 import { setBannerAdd, setBannerUpdate } from '@/api/list'
 
 const props = defineProps<{
-    type: 1 | 2 | 5 | 6 | 7
+    type: number
     title: string
 }>()
 

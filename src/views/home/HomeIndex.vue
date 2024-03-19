@@ -8,9 +8,9 @@
                         <IndexList :type="5" title="轮播图" />
                     </el-scrollbar>
                 </el-tab-pane>
-                <el-tab-pane label="友情链接" name="2" lazy>
+                <el-tab-pane label="外部链接" name="2" lazy>
                     <el-scrollbar>
-                        <IndexList :type="2" title="友情链接" />
+                        <IndexList :type="8" title="外部链接" />
                     </el-scrollbar>
                 </el-tab-pane>
             </el-tabs>

@@ -259,11 +259,24 @@ declare interface IGoodsGetListResponse extends ListTotal {
         "updatedAt": "2024-03-08T08:46:12.839Z",
         "classifyId": 9,
 
-        classify: {
-            title: string
-        },
+        classify: IGoodsClassifyParent,
         links: ILinkItem[]
     }[]
+}
+
+/**
+ * 产品分类 - 父级内容
+ */
+declare interface IGoodsClassifyParent{
+    "id": 14,
+    "p_id": 1,
+    "title": "本地语音智能核相仪",
+    "title_en": null,
+    "createdAt": "2024-03-08T06:51:32.165Z",
+    "updatedAt": "2024-03-08T06:51:32.165Z",
+    "sort": 0,
+    "status": 1
+    parent?: IGoodsClassifyParent
 }
 
 

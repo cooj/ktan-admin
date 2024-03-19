@@ -2,17 +2,20 @@
     <co-drawer v-model="defData.visible" :title="comData.title" size="40%" :loading="btnLoading" @close="onClose"
         @cancel="onClose" @confirm="onConfirm">
         <el-form ref="formRef" :model="form.data" :rules="rules" label-width="110px">
-            <el-form-item label="标题" prop="title">
+            <el-form-item label="标题:" prop="title">
                 <el-input v-model="form.data.title" maxlength="20" placeholder="请输入标题" clearable />
             </el-form-item>
 
-            <el-form-item label="英文标题" prop="title_en">
+            <el-form-item label="英文标题:" prop="title_en">
                 <el-input v-model="form.data.title_en" maxlength="30" placeholder="请输入英文标题" clearable />
             </el-form-item>
-            <el-form-item label="图片" prop="img">
-                <UploadFile v-model="form.data.img" />
+            <el-form-item label="图片:" prop="img">
+                <div class="w100% flex items-end">
+                    <UploadFile v-model="form.data.img" />
+                    <span class="ml5px text-12px c-#888">若跟商品关联，则默认使用商品图片</span>
+                </div>
             </el-form-item>
-            <el-form-item label="文件类型" prop="type">
+            <el-form-item label="文件类型:" prop="type">
                 <el-radio-group v-model="form.data.type">
                     <el-radio :label="2">
                         文档
@@ -43,24 +46,24 @@
                 </el-upload>
             </el-form-item>
 
-            <el-form-item label="文件地址" prop="href">
+            <el-form-item label="文件地址:" prop="href">
                 <el-input v-model="form.data.href" maxlength="200" placeholder="" clearable />
             </el-form-item>
-            <el-form-item label="简介描述" prop="content">
+            <el-form-item label="简介描述:" prop="content">
                 <el-input v-model="form.data.content" type="textarea" maxlength="200" placeholder="" clearable />
             </el-form-item>
 
-            <el-form-item label="关联商品" prop="goods_id">
+            <el-form-item label="关联商品:" prop="goods_id">
                 <el-select v-model="form.data.goods_id" class="w100%" clearable filterable>
                     <el-option v-for="item in props.list" :key="item.id" :label="item.title" :value="item.id" />
                 </el-select>
             </el-form-item>
 
-            <el-form-item label="排序" prop="sort">
+            <el-form-item label="排序:" prop="sort">
                 <el-input-number v-model="form.data.sort" :min="0" :max="10000" controls-position="right" placeholder=""
                     class="w100%" />
             </el-form-item>
-            <el-form-item label="是否隐藏" prop="isHide">
+            <el-form-item label="是否隐藏:" prop="isHide">
                 <el-radio-group v-model="form.data.isHide">
                     <el-radio :label="true">
                         是

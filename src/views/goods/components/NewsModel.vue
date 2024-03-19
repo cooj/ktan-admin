@@ -14,12 +14,12 @@
                 <el-input v-model="form.data.title_en" maxlength="50" placeholder="请输入英文标题" clearable />
             </el-form-item>
 
-            <el-form-item v-if="lang === 'cn'" label="副标题" prop="sub_title">
+            <!-- <el-form-item v-if="lang === 'cn'" label="副标题" prop="sub_title">
                 <el-input v-model="form.data.sub_title" maxlength="20" placeholder="请输入副标题" clearable />
             </el-form-item>
             <el-form-item v-else-if="lang === 'en'" label="英文副标题" prop="sub_title_en">
                 <el-input v-model="form.data.sub_title_en" maxlength="50" placeholder="请输入英文副标题" clearable />
-            </el-form-item>
+            </el-form-item> -->
 
             <!-- <el-form-item label="发布者" prop="author">
                 <el-input v-model="form.data.author" maxlength="30" placeholder="请输入名称" clearable />
@@ -93,7 +93,7 @@
                 <template #label>
                     <div class="w100%">
                         <b>文件关联</b>
-                        <span class="text-12px">(详细更改请通过文件管理进行操作)</span>
+                        <span class="text-12px"> (详细更改请通过服务与维修-资料下载进行操作)</span>
                     </div>
                 </template>
                 <!-- <el-input-number v-model="form.data.read" :precision="0" :min="0" :max="10 ** 14"
