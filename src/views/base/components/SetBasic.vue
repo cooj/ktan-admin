@@ -17,8 +17,8 @@
             </el-col>
             <el-col :xs="24" :sm="24" :md="20" :lg="18" :xl="16" class="mb18px">
                 <el-form-item prop="seo_description" label="SEO描述：">
-                    <el-input v-model="form.data.seo_description" type="textarea" maxlength="150"
-                        clearable show-word-limit />
+                    <el-input v-model="form.data.seo_description" type="textarea" maxlength="150" clearable
+                        show-word-limit />
                 </el-form-item>
             </el-col>
 
@@ -132,6 +132,18 @@
                 </el-form-item>
             </el-col>
             <div class="w100%" />
+            <el-col :xs="8" :sm="8" :md="10" :lg="10" :xl="12" class="mb18px">
+                <el-form-item label="启用英文版：" prop="isEn">
+                    <el-radio-group v-model="form.data.isEn">
+                        <el-radio :label="true">
+                            是
+                        </el-radio>
+                        <el-radio :label="false">
+                            否
+                        </el-radio>
+                    </el-radio-group>
+                </el-form-item>
+            </el-col>
         </el-row>
         <el-form-item class="pb18px">
             <el-button type="primary" :loading="btnLoading" @click="onSubmit">
@@ -187,6 +199,7 @@ const form = reactive({
         title_en: '',
         welcome: '',
         welcome_en: '',
+        isEn: false,
     },
 
 })
@@ -222,6 +235,7 @@ const initDefaultData = async () => {
     form.data.copyright_en = propsData.copyright_en || ''
 
     form.data.icon = propsData.icon || ''
+    form.data.isEn = propsData.is_en || false
 
     form.data.welcome = propsData.welcome || ''
     form.data.welcome_en = propsData.welcome_en || ''
@@ -253,6 +267,7 @@ const onSubmit = async () => {
         icon: form.data.icon?.trim() ?? '',
         welcome: form.data.welcome?.trim() ?? '',
         welcome_en: form.data.welcome_en?.trim() ?? '',
+        is_en: !!form.data.isEn,
     }
 
     const res = await ApiFunc(setSystemInfo(param))
@@ -261,7 +276,7 @@ const onSubmit = async () => {
     // if (res.code != 200) return ElMessage.error(res.msg)
     ElMessage.success('设置成功')
 
-    // initData?.() // 更新数据
+    // initData?.() // 更新数据 conan coon
 }
 // 重置
 const resetForm = async () => {

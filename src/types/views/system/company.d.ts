@@ -29,7 +29,7 @@ declare interface SystemCompanyApi_GetInfoResponse {
     "address_en": "广东省东莞市虎门镇太安路虎门段41号泰明商业大厦2栋Luotai Precision Instrument (Dongguan) Co., Ltd",
     "filing_en": "",
     "copyright_en": ""
-
+    is_en: boolean
 
 }
 
@@ -66,6 +66,7 @@ declare interface ISystemEditParams {
     custom_code: string
     welcome: string
     welcome_en: string
+    is_en: boolean
 }
 
 
