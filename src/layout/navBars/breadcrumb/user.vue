@@ -34,7 +34,7 @@
             </div>
         </template>
         <div class="layout-navbars-breadcrumb-user-icon">
-            <a :href="setHomeUrl()" target="_blank">
+            <a :href="setHomeUrl(userState.userInfo?.host)" target="_blank">
                 <i class="iconfont icon-home" title="首页" />
             </a>
         </div>

@@ -71,6 +71,7 @@ declare interface UserApi_GetAdminResponse {
     account: string;
     avatar: string;
     status: number;
+    host:string
 }
 
 
