@@ -24,8 +24,11 @@
                     <el-option v-for="(item, index) in defData.hrefList" :key="index" :label="item" :value="item" />
                 </el-select>
             </el-form-item>
-            <el-form-item label="横栏图片" :prop="`${!form.data.p_id && form.data.href !== '/' ? 'img' : ''}`">
-                <CoUploadImage v-model="form.data.img" :limit="1" />
+            <el-form-item label="展示图" :prop="`${!form.data.p_id && form.data.href !== '/' ? 'img' : ''}`">
+                <div class="w100% flex">
+                    <CoUploadImage v-model="form.data.img" :limit="1" />
+                    <span class="ml5px text-12px">顶级菜单请添加图片!</span>
+                </div>
             </el-form-item>
             <el-form-item label="关联商品分类" prop="is_goods">
                 <el-radio-group v-model="form.data.is_goods">
@@ -75,11 +78,10 @@ const defData = reactive({
     hrefList: [
         '/',
         '/about',
-        '/goods',
+        '/product',
         '/news',
-        '/company',
-        '/case',
-        '/notice',
+        '/service',
+        '/recruit',
         '/contact',
     ],
 })
