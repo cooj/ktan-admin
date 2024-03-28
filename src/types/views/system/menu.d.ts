@@ -41,7 +41,7 @@ declare interface MenuApi_Add {
     "title_en": string,
     status: 0 | 1
     "icon"?: string,
-    is_goods: 0 | 1
+    is_goods: number
     img: string
 }
 

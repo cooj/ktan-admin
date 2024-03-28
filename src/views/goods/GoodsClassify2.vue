@@ -1,5 +1,5 @@
 <template>
-    <IndexList title="产品分类一" :type="1" />
+    <IndexList title="产品分类二" :type="2" />
 </template>
 
 <script lang="ts" setup>

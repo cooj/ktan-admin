@@ -228,6 +228,7 @@ declare interface IRecruitEdit extends IRecruitAdd {
 declare interface IGoodsGetList extends ListPage {
     type?: number | '';    // 类型
     title?: string;  // 标题
+    pid?: number | ''; //上级分类id
 }
 
 /**
@@ -267,7 +268,7 @@ declare interface IGoodsGetListResponse extends ListTotal {
 /**
  * 产品分类 - 父级内容
  */
-declare interface IGoodsClassifyParent{
+declare interface IGoodsClassifyParent {
     "id": 14,
     "p_id": 1,
     "title": "本地语音智能核相仪",
@@ -382,6 +383,7 @@ declare interface IGoodsClassifyAdd {
     "p_id": number,
     sort: number;    // 排序
     status: number;    // 类型 1:新闻
+    type: number;    // 产品分类类型
 }
 
 

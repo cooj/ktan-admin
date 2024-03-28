@@ -51,7 +51,7 @@ import { deepClone } from '@/utils/other'
 import { setDisableTree } from '@/utils/common/tree'
 
 const props = defineProps<{
-    // type: number
+    type: number
     title: string
     list: IGoodsClassifyItem[]
 }>()
@@ -180,6 +180,7 @@ const onConfirm = useThrottleFn(async () => {
         title_en: form.data.title_en?.trim() ?? '',
         status: Number(form.data.status),
         p_id: form.data.pid || 0,
+        type: props.type,
     }
 
     if (defData.type === 1) {

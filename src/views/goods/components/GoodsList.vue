@@ -1,11 +1,11 @@
 <template>
     <my-box v-loading="defData.loading">
         <my-form-tool :data="searchData" inline @submit.prevent="onSearch">
-            <template #type="{ row }">
+            <template #pid="{ row }">
                 <!-- <el-select v-model="row.type" clearable filterable>
                     <el-option v-for="item in defData.menuData" :key="item.id" :label="item.title" :value="item.id" />
                 </el-select> -->
-                <MyCascader v-model="row.type" :options="defData.menuData"
+                <MyCascader v-model="row.pid" :options="defData.menuData"
                     :props="{ label: 'title', value: 'id', checkStrictly: true, emitPath: false }" filterable clearable
                     class="w100%" />
             </template>
@@ -58,12 +58,12 @@
 </template>
 
 <script lang="ts" setup>
-import NewsModel from './NewsModel.vue'
+import NewsModel from './GoodsModel.vue'
 import { PAGINATION } from '@/config/global'
 import { getGoodsClassifyList, getGoodsList, setGoodsDelete } from '@/api/list'
 
 const props = defineProps<{
-    // type: number
+    type: number
     title: string
 }>()
 const modelRef = ref<InstanceType<typeof NewsModel>>()
@@ -77,16 +77,16 @@ const defData = reactive({
 // form表单数据类型
 interface FormSearchData {
     name: string
-    type: string | number
+    pid: string | number
 }
 const searchData = reactive<SearchDataType<FormSearchData>>({
     data: {
         name: '',
-        type: '',
+        pid: '',
     },
     config: [
         { itemProp: { label: `${props.title}名称`, prop: 'name' }, placeholder: `请输入${props.title}名称`, width: '200' },
-        { itemProp: { label: `${props.title}分类`, prop: 'type' }, placeholder: '', width: '240', slot: true },
+        { itemProp: { label: `${props.title}分类`, prop: 'pid' }, placeholder: '', width: '240', slot: true },
     ],
     hideBtn: false,
     // showAll: true,
@@ -116,7 +116,7 @@ const tableData = reactive<CoTableProps<TableDataItem>>({
 })
 
 const initDefaultData = async () => {
-    const res = await getGoodsClassifyList({ isPage: 0 })
+    const res = await getGoodsClassifyList({ isPage: 0, type: props.type })
     if (res.code !== 200) return ElMessage.error(res.msg)
 
     defData.menuData = res.data.list
@@ -129,9 +129,9 @@ const initTableData = async () => {
         page: tableData.pagination.page,
         pageSize: tableData.pagination.page_size,
         title: searchData.data.name?.trim() ?? '',
-        // type: Number(searchData.data.type) || '',
+        type: Number(props.type) || '',
     }
-    if (searchData.data.type) data.type = Number(searchData.data.type)
+    if (searchData.data.pid) data.pid = Number(searchData.data.pid)
 
     const res = await getGoodsList(data)
     if (res.code !== 200) return ElMessage.error(res.msg)

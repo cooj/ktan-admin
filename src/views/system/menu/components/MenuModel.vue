@@ -33,10 +33,13 @@
             <el-form-item label="关联商品分类" prop="is_goods">
                 <el-radio-group v-model="form.data.is_goods">
                     <el-radio :label="1">
-                        是
+                        产品分类一
+                    </el-radio>
+                    <el-radio :label="2">
+                        产品分类二
                     </el-radio>
                     <el-radio :label="0">
-                        否
+                        不关联
                     </el-radio>
                 </el-radio-group>
             </el-form-item>
@@ -194,7 +197,7 @@ const onConfirm = useThrottleFn(async () => {
         title: form.data.title?.trim() ?? '',
         title_en: form.data.title_en?.trim() ?? '',
         status: form.data.status ? 1 : 0,
-        is_goods: form.data.is_goods ? 1 : 0,
+        is_goods: form.data.is_goods || 0,
         img: form.data.img?.trim() ?? '',
     }
 

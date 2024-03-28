@@ -143,7 +143,7 @@ import { setGoodsAdd, setGoodsUpdate } from '@/api/list'
 import { PAGINATION } from '@/config/global'
 
 const props = defineProps<{
-    // type: number
+    type: number
     title: string
     list: IGoodsClassifyItem[]
 }>()
@@ -385,6 +385,7 @@ const onConfirm = useThrottleFn(async () => {
     })
 
     const data: IGoodsAdd = {
+        type: props.type,
         sort: Number(form.data.sort),
         title: form.data.title?.trim() ?? '',
         title_en: form.data.title_en?.trim() ?? '',
@@ -396,7 +397,6 @@ const onConfirm = useThrottleFn(async () => {
         content_en: form.data.content_en?.trim() ?? '',
         isHide: form.data.isHide,
         isHot: form.data.isHot,
-        type: 0,
         read: form.data.read || 0,
         img: '',
         sub_title: form.data.sub_title || '',
