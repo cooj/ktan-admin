@@ -212,7 +212,9 @@ const onConfirm = async () => {
             width: 100%;
             height: 100%;
             display: block;
-
+            :deep(.el-image__inner){
+                object-fit: contain;
+            }
             :deep(.el-image__error) {
                 font-size: var(--co-upload-icon-size);
             }

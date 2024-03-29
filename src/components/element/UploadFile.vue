@@ -264,6 +264,7 @@ defineExpose({
             .el-upload-list__item {
                 margin: 0;
                 display: flex;
+                // align-items: center;
             }
         }
     }

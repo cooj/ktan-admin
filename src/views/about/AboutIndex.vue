@@ -73,9 +73,9 @@
                         <AboutInfo type="organization" />
                     </el-scrollbar>
                 </el-tab-pane>
-                <el-tab-pane label="荣誉资质" name="4" lazy>
+                <el-tab-pane label="合作单位" name="4" lazy>
                     <el-scrollbar>
-                        <IndexList :type="6" title="荣誉资质" />
+                        <IndexList :type="6" title="合作单位" />
                     </el-scrollbar>
                 </el-tab-pane>
             </el-tabs>
