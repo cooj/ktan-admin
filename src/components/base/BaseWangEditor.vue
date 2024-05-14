@@ -15,6 +15,7 @@ import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import type { IEditorConfig } from '@wangeditor/editor'
 import { setSignRule } from '@/utils/http/crypto'
 import { Session } from '@/utils/storage'
+import { CommonApi } from '@/api/common'
 
 const props = defineProps({
     modelValue: {
@@ -78,32 +79,54 @@ type InsertVideoFnType = (url: string, poster: string) => void
 // 配置上传图片
 editorConfig.MENU_CONF!.uploadImage = {
     fieldName: 'file',
-    server: '/api/common/upload',
-    headers: setTokenSign(),
-    // 自定义插入图片
-    customInsert(res: any, insertFn: InsertImageFnType) { // TS 语法
-        console.log(res)
-        // customInsert(res, insertFn) {                  // JS 语法
-        // res 即服务端的返回结果
+    // server: '/api/common/upload',
+    // headers: setTokenSign(),
+    // // 自定义插入图片
+    // customInsert(res: any, insertFn: InsertImageFnType) { // TS 语法
+    //     console.log(res)
+    //     // customInsert(res, insertFn) {                  // JS 语法
+    //     // res 即服务端的返回结果
 
-        // 从 res 中找到 url alt href ，然后插入图片
-        insertFn(res.data, res.data, res.data)
+    //     // 从 res 中找到 url alt href ，然后插入图片
+    //     insertFn(res.data, res.data, res.data)
+    // },
+    customUpload: async (file: File, insertFn: InsertImageFnType) => {
+        // console.log(file)
+        // 自定义上传
+        // 上传图片，返回结果，然后插入图片
+        // insertFn(图片地址，图片 alt，图片 href)
+        const res = await CommonApi.upload({ file })
+        if (res.code === 200) {
+            insertFn(res.data, res.data, res.data)
+        } else {
+            ElMessage.error('上传图片失败')
+        }
     },
 }
 
 // 配置上传视频
 editorConfig.MENU_CONF!.uploadVideo = {
     fieldName: 'file',
-    server: '/api/common/upload',
-    headers: setTokenSign(),
-    // 自定义插入图片
-    customInsert(res: any, insertFn: InsertVideoFnType) { // TS 语法
-        console.log(res)
-        // customInsert(res, insertFn) {                  // JS 语法
-        // res 即服务端的返回结果
+    // server: '/api/common/upload',
+    // headers: setTokenSign(),
+    // // 自定义插入图片
+    // customInsert(res: any, insertFn: InsertVideoFnType) { // TS 语法
+    //     console.log(res)
+    //     // customInsert(res, insertFn) {                  // JS 语法
+    //     // res 即服务端的返回结果
 
-        // 从 res 中找到 url alt href ，然后插入图片
-        insertFn(res.data, res.data)
+    //     // 从 res 中找到 url alt href ，然后插入图片
+    //     insertFn(res.data, res.data)
+    // },
+    customUpload: async (file: File, insertFn: InsertVideoFnType) => {
+        // console.log(file)
+        // 自定义上传
+        const res = await CommonApi.upload({ file })
+        if (res.code === 200) {
+            insertFn(res.data, res.data)
+        } else {
+            ElMessage.error('上传视频失败')
+        }
     },
 }
 
